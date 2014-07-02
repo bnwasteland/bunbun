@@ -1,0 +1,8 @@
+tools/
+obj/
+packages/
+Debug/
+Release/
+*.user
+*.suo
+
