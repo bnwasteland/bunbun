@@ -1,10 +1,11 @@
-﻿using RabbitMQ.Client;
+﻿using BunBun.Core.Messaging.Topologies;
+using RabbitMQ.Client;
 using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
 
 namespace BunBun.Core.Messaging {
   public class RabbitMQRegistry : Registry {
-    public RabbitMQRegistry(string rabbitHost) {
+    public RabbitMQRegistry(string rabbitHost, string[] queues) {
       For<ConnectionFactory>()
         .Singleton()
         .Use(() => new ConnectionFactory { HostName = rabbitHost });
@@ -19,6 +20,13 @@ namespace BunBun.Core.Messaging {
 
       For<IEncodeTransportMessages>().Use<JsonMessageSerializer>();
       For<IDecodeTransportMessages>().Use<JsonMessageSerializer>();
+
+      For<IRabbitMqTopology>()
+        .Singleton()
+        .Use(ctx => new UnnamedSingleQueueRoundRobinTopology(ctx.GetInstance<HandlerMap>(), queues));
+
+      For<IBus>()
+        .Use<RabbitBus>();
     }
   }
 }

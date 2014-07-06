@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using BunBun.Core.Commands;
 using BunBun.Core.Messaging;
 using RabbitMQ.Client;
@@ -8,21 +7,17 @@ using StructureMap;
 namespace BunBun.Send {
   class Send {
     static void Main() {
-      ObjectFactory.Configure(config => config.AddRegistry(new RabbitMQRegistry("localhost")));
-
-      var channel = ObjectFactory.GetInstance<IModel>();
-      channel.QueueDeclare("tnw.learning", true, false, false, null);
-      channel.QueueDeclare("tnw.wall", true, false, false, null);
-
-      var sender = ObjectFactory.GetInstance<MessageSender>();
+      ObjectFactory.Configure(config => config.AddRegistry(new SenderRegistry("caprice", "learning")));
       
-      var id = new Guid("918A92E8-DBAE-43AA-856C-9B191613DBFF");
+      var channel = ObjectFactory.GetInstance<IModel>();
+      var topology = ObjectFactory.GetInstance<IRabbitMqTopology>();
+      
+      channel.Declare(topology.GetDeclarations());
 
-      for (var i = 0; i < 5; i++) {
-        sender.Send("tnw.learning", new UpsertCourse {Id = id, Title = "Rugby"});
-        sender.Send("tnw.wall", new UpsertCourse {Id = id, Title = "Futbol"});
-      }
+      var bus = ObjectFactory.GetInstance<IBus>();
 
+      bus.Send(new UpsertCourse { Id = Guid.NewGuid(), Title = "A Course of Two Cities" });  
+      
       ObjectFactory.Container.Dispose();
     }
   }

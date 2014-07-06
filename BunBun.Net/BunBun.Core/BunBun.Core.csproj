@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fasterflect">
+      <HintPath>..\packages\fasterflect.2.1.3\lib\net40\Fasterflect.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -64,11 +67,17 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Events\CourseTitleChanged.cs" />
     <Compile Include="Events\IEvent.cs" />
+    <Compile Include="Messaging\HandlerMap.cs" />
+    <Compile Include="Messaging\IHandleMessages.cs" />
     <Compile Include="Messaging\IMessage.cs" />
     <Compile Include="Messaging\JsonMessageSerializer.cs" />
-    <Compile Include="Messaging\MessageSender.cs" />
+    <Compile Include="Messaging\RabbitBus.cs" />
     <Compile Include="Messaging\MessageSerialization.cs" />
+    <Compile Include="Messaging\Queues.cs" />
     <Compile Include="Messaging\RabbitMQRegistry.cs" />
+    <Compile Include="Messaging\RabbitMqTopology.cs" />
+    <Compile Include="Messaging\Topologies\DirectToRegisteredHandlersTopology.cs" />
+    <Compile Include="Messaging\Topologies\UnnamedSingleQueueRoundRobinTopology.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemExtensions.cs" />
   </ItemGroup>

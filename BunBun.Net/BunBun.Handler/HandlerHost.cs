@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Threading;
+using BunBun.Core.Messaging;
 using BunBun.Handler.Configuration;
+using RabbitMQ.Client;
 using StructureMap;
 
 namespace BunBun.Handler {
@@ -8,23 +9,19 @@ namespace BunBun.Handler {
     private static void Main(string[] args) {
       Console.CancelKeyPress += ConsoleOnCancelKeyPress;
       
-      ObjectFactory.Configure(config => config.AddRegistry(new HandlerRegistry()));
+      ObjectFactory.Configure(config => config.AddRegistry(new HandlerRegistry("caprice", "learning")));
 
-      StartThread("tnw.learning");
-      StartThread("tnw.wall");
+      var channel = ObjectFactory.GetInstance<IModel>();
+      var topology = ObjectFactory.GetInstance<IRabbitMqTopology>();
+
+      channel.Declare(topology.GetDeclarations());
+
+      ObjectFactory.GetInstance<MessageLoop>().Run("learning");
     }
     
     private static void ConsoleOnCancelKeyPress(object sender, ConsoleCancelEventArgs consoleCancelEventArgs) {
       Console.WriteLine(" Shutting down.");
       Environment.Exit(0);
-    }
-
-    private static void StartThread(string queueName) {
-      var worker = new Thread(() => {
-        var loop = ObjectFactory.GetInstance<MessageLoop>();
-        loop.Run(queueName);
-      });
-      worker.Start();
     }
   }
 }

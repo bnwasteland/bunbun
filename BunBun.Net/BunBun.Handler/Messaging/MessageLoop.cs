@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using BunBun.Core.Messaging;
 using RabbitMQ.Client;
+using StructureMap;
 
 namespace BunBun.Handler {
   public class MessageLoop {
@@ -34,7 +36,7 @@ namespace BunBun.Handler {
           var message = Decoder.Decode(ea.Body);
 
           Logger.Log("Decoded message of type '{0}'".FormatWith(message.GetType()));
-          Retry(5, message);
+          Retry(5, message, queue);
 
           Logger.Log("Acknowledging message of type '{0}'".FormatWith(message.GetType()));
           Channel.BasicAck(ea.DeliveryTag, false);
@@ -48,10 +50,10 @@ namespace BunBun.Handler {
       }
     }
 
-    public void Retry(uint times, IMessage message) {
+    public void Retry(uint times, IMessage message, string queue) {
       for (int i = 1; i <= times; i++) {
         try {
-          using (new MessageScope()) {
+          using (new MessageScope(queue)) {
             Dispatcher.Dispatch(message);
           }
           
@@ -66,6 +68,14 @@ namespace BunBun.Handler {
           Logger.Log("Retrying.");
         }
       }
+    }
+
+    public static void StartThread(string queueName) {
+      var worker = new Thread(() => {
+        var loop = ObjectFactory.GetInstance<MessageLoop>();
+        loop.Run(queueName);
+      });
+      worker.Start();
     }
   }
 

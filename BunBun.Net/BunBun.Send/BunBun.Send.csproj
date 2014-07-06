@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProducerRegistry.cs" />
     <Compile Include="Send.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,6 +60,10 @@
     <ProjectReference Include="..\BunBun.Core\BunBun.Core.csproj">
       <Project>{F2FBCEF6-2210-49F2-9314-E00DA661A3A1}</Project>
       <Name>BunBun.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BunBun.Handler\BunBun.Handler.csproj">
+      <Project>{F5555451-A784-4B4C-ADBC-47387BB1C3F5}</Project>
+      <Name>BunBun.Handler</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

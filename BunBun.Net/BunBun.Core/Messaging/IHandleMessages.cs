@@ -1,6 +1,4 @@
-﻿using BunBun.Core.Messaging;
-
-namespace BunBun.Handler {
+﻿namespace BunBun.Core.Messaging {
   public interface IHandleMessages<T> where T : IMessage {
     void Handle(T message);
   }

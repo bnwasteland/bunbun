@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="MessageEncoding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoundRobinQueues.cs" />
+    <Compile Include="ScanForHandlers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
