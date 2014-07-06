@@ -5,7 +5,7 @@ using System.Transactions;
 using BunBun.Core.Messaging;
 using StructureMap.Pipeline;
 
-namespace BunBun.Handler {
+namespace BunBun.Handler.Messaging {
   public class MessageScope : IDisposable {
     public readonly string Queue;
     

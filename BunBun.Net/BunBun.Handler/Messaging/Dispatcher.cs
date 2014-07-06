@@ -2,7 +2,7 @@
 using BunBun.Core.Messaging;
 using StructureMap;
 
-namespace BunBun.Handler {
+namespace BunBun.Handler.Messaging {
   public interface IDispatchDomainMessages {
     void Dispatch(IMessage message);
   }

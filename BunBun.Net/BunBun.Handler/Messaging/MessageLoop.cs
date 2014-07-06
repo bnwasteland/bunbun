@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using BunBun.Core.Messaging;
 using RabbitMQ.Client;
 using StructureMap;
 
-namespace BunBun.Handler {
+namespace BunBun.Handler.Messaging {
   public class MessageLoop {
     public IModel Channel { get; private set; }
     public IDecodeTransportMessages Decoder { get; private set; }

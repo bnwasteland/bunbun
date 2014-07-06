@@ -12,7 +12,7 @@ namespace BunBun.Handler.Configuration {
         scan.TheCallingAssembly();
       });
       
-      IncludeRegistry(new RabbitMQRegistry(queueServer, queues));
+      IncludeRegistry(new RabbitMqRegistry(queueServer, queues));
       IncludeRegistry(new TypeRegistry());
       
       For<IDocumentStore>()

@@ -1,10 +1,6 @@
 ﻿using RabbitMQ.Client;
 
 namespace BunBun.Core.Messaging {
-  public interface IBus {
-    void Send(IMessage msg);
-  }
-
   public class RabbitBus : IBus {
     public IEncodeTransportMessages Encoder { get; private set; }
     public IRabbitMqTopology Topology { get; private set; }

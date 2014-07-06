@@ -1,4 +1,4 @@
-﻿using StructureMap;
+﻿using BunBun.Handler.Messaging;
 using StructureMap.Pipeline;
 
 namespace BunBun.Handler.Configuration {

@@ -68,13 +68,13 @@
     <Compile Include="Events\CourseTitleChanged.cs" />
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Messaging\HandlerMap.cs" />
+    <Compile Include="Messaging\IBus.cs" />
     <Compile Include="Messaging\IHandleMessages.cs" />
     <Compile Include="Messaging\IMessage.cs" />
     <Compile Include="Messaging\JsonMessageSerializer.cs" />
     <Compile Include="Messaging\RabbitBus.cs" />
     <Compile Include="Messaging\MessageSerialization.cs" />
-    <Compile Include="Messaging\Queues.cs" />
-    <Compile Include="Messaging\RabbitMQRegistry.cs" />
+    <Compile Include="Messaging\RabbitMqRegistry.cs" />
     <Compile Include="Messaging\RabbitMqTopology.cs" />
     <Compile Include="Messaging\Topologies\DirectToRegisteredHandlersTopology.cs" />
     <Compile Include="Messaging\Topologies\UnnamedSingleQueueRoundRobinTopology.cs" />

@@ -38,11 +38,13 @@ namespace BunBun.Core.Messaging.Topologies {
     }
 
     private IEnumerator<string> QueueCycle(IEnumerable<string> queues) {
+      var list = queues.ToList();
       while (true) {
-        foreach (var queue in queues) {
+        foreach (var queue in list) {
           yield return queue;
         }
       }
-    } 
+      // ReSharper disable once FunctionNeverReturns
+    }
   }
 }

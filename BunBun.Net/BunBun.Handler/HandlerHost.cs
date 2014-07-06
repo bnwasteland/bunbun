@@ -1,12 +1,13 @@
 ﻿using System;
 using BunBun.Core.Messaging;
 using BunBun.Handler.Configuration;
+using BunBun.Handler.Messaging;
 using RabbitMQ.Client;
 using StructureMap;
 
 namespace BunBun.Handler {
   public class HandlerHost {
-    private static void Main(string[] args) {
+    private static void Main() {
       Console.CancelKeyPress += ConsoleOnCancelKeyPress;
       
       ObjectFactory.Configure(config => config.AddRegistry(new HandlerRegistry("caprice", "learning")));

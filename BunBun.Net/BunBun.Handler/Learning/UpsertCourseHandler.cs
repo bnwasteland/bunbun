@@ -2,6 +2,7 @@
 using BunBun.Core.Entities;
 using BunBun.Core.Events;
 using BunBun.Core.Messaging;
+using BunBun.Handler.Messaging;
 using Raven.Client;
 
 namespace BunBun.Handler.Learning {

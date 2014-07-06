@@ -4,8 +4,9 @@ using RabbitMQ.Client;
 
 namespace BunBun.Core.Messaging {
   public interface IRabbitMqTopology {
-    IEnumerable<RabbitMqMessageTarget> GetDestinations(IMessage msg);
     RabbitMqDeclarations GetDeclarations();
+
+    IEnumerable<RabbitMqMessageTarget> GetDestinations(IMessage msg);
     IEnumerable<Type> GetConsumers(Type msgType, string queue);
   }
 

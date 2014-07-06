@@ -4,8 +4,8 @@ using StructureMap.Configuration.DSL;
 using StructureMap.Pipeline;
 
 namespace BunBun.Core.Messaging {
-  public class RabbitMQRegistry : Registry {
-    public RabbitMQRegistry(string rabbitHost, string[] queues) {
+  public class RabbitMqRegistry : Registry {
+    public RabbitMqRegistry(string rabbitHost, string[] queues) {
       For<ConnectionFactory>()
         .Singleton()
         .Use(() => new ConnectionFactory { HostName = rabbitHost });
